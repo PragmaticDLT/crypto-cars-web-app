@@ -1,6 +1,6 @@
 {
   "name": "crypto-cars-web-app",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "PragmaticDLT Crypto Cars Web app",
   "main": "index.js",
   "repository": "https://github.com/PragmaticDLT/crypto-cars-web-app.git",

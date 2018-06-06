@@ -2,6 +2,15 @@
 
 PragmaticDLT Crypto Cars Web app
 
+**REQUIREMENTS**
+
+For correct work of web application you need to start dapp:
+
+1. Clone **crypto-cars-dapp** repo from GitHub https://github.com/PragmaticDLT/crypto-cars-dapp
+2. Follow instructions in that repository to setup dapp
+
+**Important:** DApp an Web app should have same parent folder!
+
 **Install**
 
 Run `yarn` to download dependencies.
