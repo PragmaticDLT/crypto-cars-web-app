@@ -25,7 +25,6 @@ class ApplicationStore {
 
   @action
   logout = async () => {
-    this.appLoading = true;
     this.isAuthenticated = false;
 
     AuthService.logout();

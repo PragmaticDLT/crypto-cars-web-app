@@ -1,11 +1,13 @@
-'use strict';
+"use strict";
 
-import React from 'react';
-import { inject, observer } from 'mobx-react';
+import React from "react";
+import { withRouter } from "react-router-dom";
+import { inject, observer } from "mobx-react";
 
-import {List, Item} from './styles';
+import { List, Item } from "./styles";
 
-@inject('LoginSceneStore', 'ApplicationStore')
+@withRouter
+@inject("LoginSceneStore", "ApplicationStore")
 @observer
 export default class LoginUsersList extends React.Component {
   componentDidMount() {
@@ -15,14 +17,17 @@ export default class LoginUsersList extends React.Component {
   }
 
   chooseUser = async (username) => {
-    await this.props.ApplicationStore.login(username);
+    const { ApplicationStore, LoginSceneStore, history } = this.props;
 
-    this.props.ApplicationStore.setAuthenticated();
-    this.props.history.push('/');
+    await ApplicationStore.login(username);
+
+    ApplicationStore.setAuthenticated();
+    LoginSceneStore.toggleUserList();
+    history.push("/");
   };
 
   render() {
-    const {usersListFetching, usersList} = this.props.LoginSceneStore;
+    const { usersListFetching, usersList } = this.props.LoginSceneStore;
 
     return (
       <List>
@@ -31,7 +36,7 @@ export default class LoginUsersList extends React.Component {
         ) : (
           usersList.length ? (
             usersList.map(user => {
-              return <Item onClick={() => this.chooseUser(user.firstName)}>{user.firstName}</Item>
+              return <Item onClick={() => this.chooseUser(user.firstName)}>{user.firstName}</Item>;
             })
           ) : (
             <Item disabled>No users found</Item>

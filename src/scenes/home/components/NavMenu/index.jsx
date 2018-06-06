@@ -12,20 +12,23 @@ import { Overlay, Wrapper } from './styles';
 @inject('ApplicationStore', 'HomeSceneStore')
 @observer
 export default class NavMenu extends React.Component {
-  logout = () => {
+  logout = event => {
+    event.stopPropagation();
+
     if (confirm('Are you sure, you want to logout?')) {
       this.props.ApplicationStore.logout();
-      location.push('/');
+      this.props.history.push('/login');
     }
   };
 
   render() {
+    const { HomeSceneStore, ApplicationStore } = this.props;
 
     return (
       <Fragment>
-        {this.props.HomeSceneStore.menuOpened && <Overlay/>}
-        <Wrapper onClick={this.props.HomeSceneStore.toggleMenu}>
-          {this.props.ApplicationStore.isAuthenticated && (
+        {HomeSceneStore.menuOpened && <Overlay/>}
+        <Wrapper onClick={HomeSceneStore.toggleMenu}>
+          {ApplicationStore.isAuthenticated && (
             <MenuItem
               clickHandler={this.logout}
               url={user}

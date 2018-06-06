@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 
 import LoginUserList from './components/LoginUsersList';
-import { Container, Input, InputHolder, LoginButton, PasswordIcon, UserIcon, Wrapper, ToggleLoginListButton } from './styles';
+import { Container, Input, InputHolder, LoginButton, UserIcon, Wrapper, ToggleLoginListButton } from './styles';
 
 @withRouter
 @inject('ApplicationStore', 'LoginSceneStore')
@@ -25,13 +25,12 @@ export default class Login extends React.Component {
 
   login = async () => {
     const login = this.userLogin.value.trim();
-    // const password = this.userPassword.value.trim();
 
     if (!login) {
       return alert('Enter username');
     }
 
-    const token = await this.props.ApplicationStore.login(login/*, password*/);
+    const token = await this.props.ApplicationStore.login(login);
 
     if (token) {
       this.props.ApplicationStore.setAuthenticated();
@@ -69,15 +68,6 @@ export default class Login extends React.Component {
             />
             {this.props.LoginSceneStore.usersListOpened && <LoginUserList/>}
           </InputHolder>
-          {/*<InputHolder>
-            <PasswordIcon />
-            <Input
-              type={'Password'}
-              innerRef={element => (this.userPassword = element)}
-              placeholder={'Пароль'}
-              onKeyUp={this.loginOnEnter}
-            />
-          </InputHolder>*/}
           <LoginButton
             status={this.props.ApplicationStore.appLoading}
             onClick={this.login}
