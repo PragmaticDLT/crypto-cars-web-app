@@ -1,18 +1,18 @@
-'use strict';
+"use strict";
 
-import React from 'react';
-import { observer, inject } from 'mobx-react';
-import { withRouter } from 'react-router-dom';
+import React, { Fragment } from "react";
+import { observer, inject } from "mobx-react";
+import { withRouter } from "react-router-dom";
 
-import config from 'config';
-import AuthService from 'core/auth';
-import App from 'components/App';
-import Spinner from 'components/Spinner';
+import config from "config";
+import AuthService from "core/auth";
+import App from "components/App";
+import Spinner from "components/Spinner";
 
-const {INVALID_TOKEN, TOKEN_DOES_NOT_EXIST, OK} = config.auth.statusMap;
+const { INVALID_TOKEN, TOKEN_DOES_NOT_EXIST, OK } = config.auth.statusMap;
 
 @withRouter
-@inject('ApplicationStore', 'UserDataStore')
+@inject("ApplicationStore", "UserDataStore")
 @observer
 export default class AppLoader extends React.Component {
   componentDidMount() {
@@ -35,7 +35,7 @@ export default class AppLoader extends React.Component {
         break;
       }
       case TOKEN_DOES_NOT_EXIST: {
-        this.props.history.push('/login');
+        this.props.history.push("/login");
         break;
       }
       case INVALID_TOKEN:
@@ -48,6 +48,11 @@ export default class AppLoader extends React.Component {
   };
 
   render() {
-    return this.props.ApplicationStore.appLoading ? <Spinner/> : <App/>;
+    return (
+      <Fragment>
+        {this.props.ApplicationStore.appLoading && <Spinner/>}
+        <App/>;
+      </Fragment>
+    )
   }
 }

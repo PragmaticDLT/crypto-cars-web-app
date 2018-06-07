@@ -3,10 +3,21 @@
 import styled, {keyframes} from 'styled-components';
 import { palette } from 'static/theme';
 
+export const Container = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+`;
+
 export const Wrapper = styled.div`
   position: absolute;
   top: 40%;
   left: 47%;
+  zIndex: 1000;
   width: 50px;
   height: 40px;
   text-align: center;
