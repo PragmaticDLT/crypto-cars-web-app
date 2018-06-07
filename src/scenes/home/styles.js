@@ -12,8 +12,21 @@ export const Container = styled.div`
 `;
 
 export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
   width: 100%;
   height: 100%;
+`;
+
+export const Heading = styled.h1`
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 36px;
+  color: ${palette.darkGray};
+
 `;
 
 export const CenterContent = styled.div`

@@ -22,7 +22,7 @@ class LoginSceneStore {
     usersList = await AuthService.fetchUsersList();
     runInAction(() => {
       this.usersList = usersList;
-      this.usersListFetching = false
+      this.usersListFetching = false;
     });
   }
 }

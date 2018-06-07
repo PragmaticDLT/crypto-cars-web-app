@@ -5,11 +5,15 @@ import { inject, observer } from 'mobx-react';
 
 import NavMenu from './components/NavMenu';
 import Car from './components/Car';
-import { Container, Wrapper, CenterContent, MintButton, CarList } from './styles';
+import { Container, Wrapper, Heading, CenterContent, MintButton, CarList } from './styles';
 
 @inject('CarStore')
 @observer
 export default class Home extends React.Component {
+  componentDidMount() {
+    this.props.CarStore.setDefaultOwner();
+  }
+
   render() {
     const carStore = this.props.CarStore;
 
@@ -17,9 +21,7 @@ export default class Home extends React.Component {
       <Container>
         <NavMenu/>
         <Wrapper>
-          <CenterContent>
-            <h1>Car Auction</h1>
-          </CenterContent>
+          <Heading>Car Auction</Heading>
           <CenterContent>
             <MintButton onClick={carStore.mintCar}>Mint Car</MintButton>
           </CenterContent>

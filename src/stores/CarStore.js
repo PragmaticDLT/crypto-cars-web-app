@@ -1,25 +1,20 @@
 'use strict';
 
 import {observable, action, runInAction} from 'mobx';
-import getCarManagerInstance from 'contracts/carManagerInstance';
-import randomColor from 'utils/randomColor';
+import CarManagerAPI from 'apis/CarManagerAPI';
 
 class CarStore {
-  @observable carManagerInstance = null;
   @observable cars = [];
   @observable owner = null;
-  @observable isLoading = true;
 
-  constructor() {
-    this.setup();
+  constructor(carManagerAPI) {
+    this.carManagerAPI = carManagerAPI;
   }
 
   @action
-  setup = async () => {
-    const carManagerInstance = await getCarManagerInstance();
+  setDefaultOwner = async () => {
+    const owner = await this.carManagerAPI.getDefaultOwner();
 
-    runInAction(() => this.carManagerInstance = carManagerInstance);
-    const owner = await carManagerInstance.owner();
     runInAction(() => this.owner = owner);
 
     this.fetchCars();
@@ -27,30 +22,17 @@ class CarStore {
 
   @action
   fetchCars = async () => {
-    const carIds = await this.carManagerInstance.getCarIds(this.owner);
+    const cars = await this.carManagerAPI.fetchCars(this.owner);
 
-    if (!carIds.length) {
-      return;
-    }
-
-    const cars = await Promise.all(
-      carIds.map(async id => {
-        return this.carManagerInstance.getCarById(id);
-      })
-    );
-
-    runInAction(() => this.cars.replace(cars));
+    runInAction(() => this.cars = cars);
   };
 
   @action
   mintCar = async () => {
-    const gradient = [randomColor(), randomColor()];
-    await this.carManagerInstance.createNewCar('Octavia RS', gradient[0], gradient[1], {
-      from: this.owner,
-      gas: 170000
-    });
-    runInAction(() => this.cars.push(['Octavia RS', gradient[0], gradient[1]]));
+    const car = await this.carManagerAPI.mintCar(this.owner);
+
+    runInAction(() => this.cars.push(car));
   };
 }
 
-export default new CarStore();
+export default new CarStore(CarManagerAPI);
