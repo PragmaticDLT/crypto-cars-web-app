@@ -12,15 +12,6 @@ class CarStore {
   }
 
   @action
-  setDefaultOwner = async () => {
-    const owner = await this.carManagerAPI.getDefaultOwner();
-
-    runInAction(() => this.owner = owner);
-
-    this.fetchCars();
-  };
-
-  @action
   fetchCars = async () => {
     const cars = await this.carManagerAPI.fetchCars(this.owner);
 

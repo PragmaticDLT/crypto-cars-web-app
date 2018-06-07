@@ -4,7 +4,8 @@ import styled from 'styled-components';
 
 import { palette } from 'static/theme';
 
-export const Wrapper = styled.div`
+export const Menu = styled.div`
+    width: 50px;
     height: 100%;
     background-color: ${palette.green};
     overflow-x: hidden;
