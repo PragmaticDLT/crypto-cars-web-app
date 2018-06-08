@@ -67,5 +67,10 @@ export default () => {
     #root {
       height: 100%;
     }
+    
+    p, a {
+      font-size: 14px;
+      color: #333333;
+    }
   `;
 };

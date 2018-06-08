@@ -15,6 +15,7 @@
     "prettier:jsx": "prettier --no-bracket-spacing --single-quote --prose-wrap never --write ./src/**/*.jsx"
   },
   "dependencies": {
+    "bluebird": "^3.5.1",
     "mobx": "^4.3.0",
     "mobx-react": "^5.1.2",
     "mobx-react-devtools": "^5.0.1",

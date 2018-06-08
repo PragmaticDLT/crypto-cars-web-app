@@ -14,5 +14,8 @@ export default {
   tokenLocalStorageKey: 'LexusLXBMWX6MMercedesS65AMG',
   auth: {
     statusMap: {INVALID_TOKEN, TOKEN_DOES_NOT_EXIST, OK}
+  },
+  web3: {
+    provider: "http://localhost:7545"
   }
 };

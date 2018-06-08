@@ -1,5 +1,9 @@
+"use strict";
+
 import contract from "truffle-contract";
-import getProvider from "./provider";
+import Web3 from "web3";
+
+import config from "config";
 
 // TODO Find better artifacts deploying solution
 import carManagerContractArtifact from "../../../crypto-cars-dapp/build/contracts/CarManager.json";
@@ -7,9 +11,9 @@ import addresses from "../../../crypto-cars-dapp/build/addresses.json";
 
 const { carManager } = addresses;
 
-export default async function getCarManagerInstance() {
+export default function getCarManagerInstance() {
   const carManagerContract = contract(carManagerContractArtifact);
-  carManagerContract.setProvider(getProvider());
+  carManagerContract.setProvider(new Web3.providers.HttpProvider(config.web3.provider));
 
-  return await carManagerContract.at(carManager);
+  return carManagerContract.at(carManager);
 }

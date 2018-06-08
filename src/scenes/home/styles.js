@@ -29,14 +29,10 @@ export const Heading = styled.h1`
 
 `;
 
-export const CenterContent = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
 export const MintButton = styled.div`
+  margin: 0 auto;
   background-color: ${palette.green};
+  opacity: ${props => props.disabled ? '0.5' : '1'};
   border: none;
   color: white;
   padding: 15px 32px;
@@ -44,7 +40,7 @@ export const MintButton = styled.div`
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  cursor: pointer;
+  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
   user-select: none;
   
   &:active {
@@ -57,4 +53,8 @@ export const CarList = styled.div`
   flex-wrap: wrap-reverse;
   justify-content: space-around;
   align-items: center;
+`;
+
+export const MetaMaskRemainder = styled.p`
+  text-align: center;
 `;

@@ -1,16 +1,15 @@
 'use strict';
 
+import Promise from "bluebird/js/release/bluebird";
 import getCarManagerInstance from 'contracts/carManagerInstance';
 import randomColor from 'utils/randomColor';
 
 class CarManagerAPI {
   constructor() {
     this.carManager = null;
-
-    this.setup();
   };
 
-  setup = async () => {
+  connect = async () => {
     this.carManager = await getCarManagerInstance();
   };
 
@@ -18,14 +17,12 @@ class CarManagerAPI {
     const carIds = await this.carManager.getCarIds(owner);
 
     if (!carIds.length) {
-      return;
+      return [];
     }
 
-    return Promise.all(
-      carIds.map(async id => {
-        return this.carManager.getCarById(id);
-      })
-    );
+    return Promise.map(carIds, id => {
+      return this.carManager.getCarById(id);
+    });
   };
 
   mintCar = async owner => {
@@ -38,10 +35,6 @@ class CarManagerAPI {
 
     return ['Octavia RS', gradient[0], gradient[1]];
   };
-
-  getDefaultOwner = async () => {
-    return this.carManager.owner();
-  }
 }
 
 export default new CarManagerAPI();
