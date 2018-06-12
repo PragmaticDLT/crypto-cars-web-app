@@ -36,14 +36,7 @@ export default class Home extends React.Component {
           }
           {carStore.owner && (
             <CarList>
-              {carStore.cars.map(car =>
-                <Car
-                  key={`${car[0]}-${car[1]}`}
-                  name={car[0]}
-                  startColor={car[1]}
-                  endColor={car[2]}
-                />
-              )}
+              {carStore.cars.map(car => <Car key={car.id} car={car} />)}
             </CarList>
           )}
         </Wrapper>

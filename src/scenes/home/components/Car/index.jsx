@@ -1,16 +1,24 @@
 "use strict";
 
 import React from "react";
+import PropTypes from "prop-types";
+import { inject, observer } from "mobx-react";
 import { Wrapper, Header, CarName, SellButton, CarIcon} from "./styles";
 
-const Car = ({startColor, endColor, name}) => (
+const Car = inject("AuctionStore")(observer(({car, AuctionStore}) => (
   <Wrapper>
     <Header>
-      <CarName>{name}</CarName>
-      <SellButton onClick={() => alert('Sorry, this functionality is not implemented yet.')}>sell</SellButton>
+      <CarName>{car.name}</CarName>
+      <SellButton onClick={AuctionStore.addCarToAuction}>
+        sell
+      </SellButton>
     </Header>
-    <CarIcon startColor={startColor} endColor={endColor}/>
+    <CarIcon startColor={car.startColor} endColor={car.endColor}/>
   </Wrapper>
-);
+)));
+
+Car.propTypes = {
+  car: PropTypes.object.isRequired
+};
 
 export default Car;

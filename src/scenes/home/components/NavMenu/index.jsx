@@ -1,21 +1,17 @@
-'use strict';
+"use strict";
 
-import React, { Fragment } from 'react';
-import { inject, observer } from 'mobx-react';
+import React from "react";
 
-import { Overlay, Menu } from './styles';
+import { Menu } from "./styles";
+import MenuItem from "./components/MenuItem";
+import garage from "static/images/garage.svg";
+import auction from "static/images/auction.svg";
 
-@inject('HomeSceneStore')
-@observer
-export default class NavMenu extends React.Component {
-  render() {
-    const { HomeSceneStore} = this.props;
+const NavMenu = () => (
+  <Menu>
+    <MenuItem url={garage} active={true}/>
+    <MenuItem url={auction}/>
+  </Menu>
+);
 
-    return (
-      <Fragment>
-        {HomeSceneStore.menuOpened && <Overlay/>}
-        <Menu onClick={HomeSceneStore.toggleMenu}/>
-      </Fragment>
-    );
-  }
-}
+export default NavMenu;

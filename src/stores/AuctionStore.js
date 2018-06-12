@@ -7,6 +7,11 @@ class AuctionStore {
   @observable cars = [];
 
   @action
+  addCarToAuction = (car) => {
+    this.cars = [...this.cars, car];
+  };
+
+  @action
   createAuction = async (carId) => {
     await this.carAuctionInstance.createAuction(carId, 10, {
       gas: 170000

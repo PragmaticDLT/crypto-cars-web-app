@@ -1,13 +1,19 @@
-'use strict';
+"use strict";
 
-import React from 'react';
-import {MenuIcon, MenuLabel, Wrapper} from './styles';
+import React from "react";
+import PropTypes from "prop-types";
+import { Icon, Item } from "./styles";
 
-const MenuItem = ({clickHandler, active, url, caption}) => (
-  <Wrapper onClick={clickHandler} active={active}>
-    <MenuIcon url={url} />
-    <MenuLabel>{caption}</MenuLabel>
-  </Wrapper>
+const MenuItem = ({url, clickHandler, active}) => (
+  <Item onClick={clickHandler} active={active}>
+    <Icon url={url} active={active}/>
+  </Item>
 );
+
+MenuItem.propTypes = {
+  url: PropTypes.string.isRequired,
+  clickHandler: PropTypes.func,
+  active: PropTypes.bool
+};
 
 export default MenuItem;
