@@ -1,7 +1,7 @@
 "use strict";
 
 import styled from "styled-components";
-import { palette } from 'static/theme';
+import { palette } from "static/theme";
 
 export const Item = styled.div`
   box-sizing: border-box;
@@ -9,10 +9,11 @@ export const Item = styled.div`
   height: 50px;
   padding: 8px;
   cursor: pointer;
-  background-color: ${props => props.active ? palette.white : 'none'};
+  background-color: ${props => props.active ? palette.white : "none"};
+  transition: all 300ms;
 
   &:hover {
-    background-color: ${props => props.active ? 'none' : palette.darkGreen};
+    background-color: ${props => props.active ? "none" : palette.darkGreen};
   }
 `;
 
