@@ -6,6 +6,7 @@ const palette = {
   veryLightGray: '#eceff1',
   red: '#d71721',
   green: '#4baf4f',
+  darkGreen: '#317533',
   blue: '#80d3f9',
   orange: '#fc8f06',
   lightOrange: '#ffd197'

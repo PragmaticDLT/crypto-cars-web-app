@@ -68,6 +68,11 @@ export default () => {
       height: 100%;
     }
     
+    h1, h2, h3, h4, h5, h6, p, a {
+      margin: 0;
+      padding: 0;
+    }
+    
     p, a {
       font-size: 14px;
       color: #333333;
