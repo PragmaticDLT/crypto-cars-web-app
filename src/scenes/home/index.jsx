@@ -4,8 +4,9 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 
 import NavMenu from "./components/NavMenu";
+import MintButton from "./components/MintButton";
 import Car from "./components/Car";
-import { Container, Wrapper, Heading, MintButton, CarList, MetaMaskRemainder } from "./styles";
+import { Container, Wrapper, Heading, CarList, MetaMaskRemainder } from "./styles";
 
 @inject("CarStore")
 @observer
@@ -27,9 +28,7 @@ export default class Home extends React.Component {
 
         <Wrapper>
           <Heading>Car Auction</Heading>
-          <MintButton disabled={!carStore.owner} onClick={carStore.mintCar}>
-            Mint Car
-          </MintButton>
+          <MintButton/>
           {!carStore.owner &&
             <MetaMaskRemainder>
               To use our app please login or create <a href="https://metamask.io/">MetaMask</a> account.

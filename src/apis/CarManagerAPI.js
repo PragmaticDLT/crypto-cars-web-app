@@ -1,6 +1,8 @@
 'use strict';
 
 import Promise from "bluebird/js/release/bluebird";
+import Web3API from "./Web3API";
+
 import getCarManagerInstance from 'contracts/carManagerInstance';
 import randomColor from 'utils/randomColor';
 
@@ -16,7 +18,7 @@ class CarManagerAPI {
   fetchCars = async owner => {
     const carIds = await this.carManager.getCarIds(owner);
 
-    if (!carIds.length) {
+    if (!carIds || !carIds.length) {
       return [];
     }
 
@@ -26,14 +28,19 @@ class CarManagerAPI {
   };
 
   mintCar = async owner => {
-    const gradient = [randomColor(), randomColor()];
+    try {
+      const gradient = [randomColor(), randomColor()];
 
-    await this.carManager.createNewCar('Octavia RS', gradient[0], gradient[1], {
-      from: owner,
-      gas: 170000
-    });
+      await this.carManager.createNewCar('Octavia RS', gradient[0], gradient[1], {
+        from: owner,
+        value: Web3API.web3.toWei(1, "ether"),
+        gas: 1000000
+      });
 
-    return ['Octavia RS', gradient[0], gradient[1]];
+      return ['Octavia RS', gradient[0], gradient[1]];
+    } catch(error) {
+      console.error('Mint Car failed: ', error);
+    }
   };
 }
 

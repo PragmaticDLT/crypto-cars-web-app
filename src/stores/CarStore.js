@@ -54,7 +54,9 @@ class CarStore {
     if (this.owner) {
       const car = await this.carManagerAPI.mintCar(this.owner);
 
-      runInAction(() => this.cars.push(car));
+      if (car) {
+        runInAction(() => this.cars.push(car));
+      }
     } else {
       alert('Please login to your MetaMask account');
     }
